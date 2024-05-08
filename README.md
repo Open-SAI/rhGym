@@ -4,7 +4,7 @@ A pragmatic space to save notes, tips, commands in a Red Hat Engineer training j
 ### Git / github 
 - Init local new repo ```$ git init```
 
-### Podman **web.sh** 
+### Podman  
 Podman: tool to pods, containers and images management:
 - ```podman -v``` &rarr; podman version
 - ```podman pull registryUrl/user-Org/repository:imgTag``` &rarr; pull remote image
