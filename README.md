@@ -4,6 +4,13 @@ A pragmatic space to save notes, tips, commands in a Red Hat Engineer training j
 ### Git / github 
 - Init local new repo ```$ git init```
 
+### Basics
+- A container is an encapsulated process with his runtime dependencies (independents libraries from the host operating system)
+- Container image layers are immutable
+- The container engine add a writable layer for runtime file modifications
+- Container are ephemeral (writable layer disappears in the container removing)
+- Open Container Initiative (OCI) is the governance organization to standards in the containers world
+
 ### Podman  
 Podman: tool to pods, containers and images management:
 - ```podman -v``` &rarr; podman version
@@ -37,8 +44,11 @@ Podman: tool to pods, containers and images management:
 - ```podman build -f ContainerFile -t ContainerImageServer``` &rarr; create an image named ContainerImageServer (-d option), from the ContainerFile descriptor
 - ```podman image tag ContainerImage:0.1``` &rarr; add a tag to the ContainerImage, the IMAGE ID remains the same value because the tag point to the same image
 - ```podman image rm ContainerImage``` &rarr; remove the ContainerImage, to delete an image it is necesary stop and delete all the containers that use the image (-f option to force)
+- ```podman push Registry/Url/user/ContainerImage:tag``` &rarr; push the ContainerImage to the Registry
 
-
+### OpenShift
+- ```ROSA``` &rarr; Red Hat OpenShift on AWS
+- ```ARO``` &rarr; Azure Red Hat OpenShift
 
 
 
