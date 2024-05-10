@@ -45,6 +45,39 @@ Podman: tool to pods, containers and images management:
 - ```podman image tag ContainerImage:0.1``` &rarr; add a tag to the ContainerImage, the IMAGE ID remains the same value because the tag point to the same image
 - ```podman image rm ContainerImage``` &rarr; remove the ContainerImage, to delete an image it is necesary stop and delete all the containers that use the image (-f option to force)
 - ```podman push Registry/Url/user/ContainerImage:tag``` &rarr; push the ContainerImage to the Registry
+#### Images
+- Containerfile &rarr; set of instructions to build a container image
+    - each instruction create a new layer in the resulting image (layers stacked in the resulting container image)
+    - podman supports Dockerfiles and Containerfiles
+    - use a small domain-specific language (DSL)
+        - FROM &rarr; set the base image for the new container image
+        - WORKDIR &rarr; set the current directory of working
+        - COPY & ADD &rarr; ...files from build host to container image. Relative paths
+        - RUN &rarr; run command in the container, results in a new container layer
+        - ENTRYPOINT &rarr; executable to run when the container is started
+        - CMD &rarr; command to run when container is started
+        - USER &rarr; active user whitin the container (root is not recommended)
+        - LABEL &rarr; metadata, key-value...
+        - EXPOSE &rarr; metadata, the port of the app/s in the container
+        - ENV &rarr; vars available in the container
+        - ARG &rarr; built-time variables
+        - VOLUME &rarr; where store the data outside of the container, path where mounts volume inside of the container
+    - When is not used a tag, podman uses the 'latest'
+- In the building of the image, is used a base image (UBI: Universal Base images), the base images determines
+    - Init System
+    - Package manager
+    - Filesystem layout
+    - Preinstalled dependencies and runtimes (Python, Node.js, etc...)
+    - Processor compatibility...
+    - UBI variants 
+        - standard (primary UBI)
+        - init (support systemd)
+        - minimal (microdnf)
+        - micro (smallest UBI, does not include package manager)
+
+
+
+
 
 ### OpenShift
 - ```ROSA``` &rarr; Red Hat OpenShift on AWS
