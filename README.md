@@ -68,7 +68,24 @@ Podman: tool to pods, containers and images management:
         - EXPOSE &rarr; metadata, the port of the app/s in the container
         - ENV &rarr; vars available in the container
         - ARG &rarr; built-time variables
-        - VOLUME &rarr; where store the data outside of the container, path where mounts volume inside of the container
+        - VOLUME &rarr; where store the data outside of the container, path where mounts volume inside of the container, supports multiple paths to supports multiple volumes, his value is inmutable after his calling in the Containerfile (```podman volume create VOLUME```, ```podman volume ls --format="{{.Mountpoing}}\t{{Name}}"``` &rarr; to list)
+        - **Best Practices**
+            - to use ENV configurations to store dependent container configurations, thats vars can be called from the apps &rarr; ENV DB_HOST="db.domain.com"
+            - with the *--build-arg* flag to use ARG build-time vars to customize the container build &rarr; ```ARG MY_VAR="my_value" RUN command "parameter ${MY_VAR}"``` 
+            - with the use of ARG values in the ENV instructions, can be possible to preserve the build-time variables for runtime
+            - the option *prune* can be used to remove unused volumes &rarr; ```podman volume prune```
+            - ```podman secret create SECRET_NAME SecretFile``` &rarr; create a secret using a file
+            - ```podman secret create SECRET_NAME SecretFile``` &rarr; create a secret using a file
+            - ```printf "MyS3cr3t" | podman secret create -``` &rarr; create a secret using the standard input
+            - ```podman secret create SECRET_NAME SecretFile``` &rarr; create a secret using a file
+            - ```podman secret create SECRET_NAME SecretFile``` &rarr; create a secret using a file, the *--driver pass* store the secret in a GPG encrypted file, this option also supports *shell* script
+            - ```podman secrets ls``` &rarr; list stored secrets
+            - ```podman secrets rm My_Secret``` &rarr; remove My_Secret secret
+            - ```podman run -it --secret My_Secret --name MyApp``` &rarr; make My_Secret available for use of container MyApp, mounted in a *tmpfs* container dir */run/secret*. Neither *podman commit // podman export* copy secret data to the image or *.tar* file
+            - chaining instructions reduce the number of image layers &rarr; ```RUN command0 params0 && command1 params1 && command2 params2```
+            - ```--squash-all``` option squash the layers from the previous or parent image (reduce size of builded images)            
+            - using multistage builds reduce image layers (reduce size) &rarr; first stage: ```FROM image/url:TAG **as builder**```, second stage:```FROM another/image/url:TAG \ COPY **--from-builder** Original_Source Dest_Source``` (reuse the first build)
+            - podman rebuilds all the layers only if the **package.json** is changed
     - When is not used a tag, podman uses the 'latest'
 - In the building of the image, is used a base image (UBI: Universal Base images), the base images determines
     - Init System
