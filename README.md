@@ -98,10 +98,17 @@ Podman: tool to pods, containers and images management:
         - init (support systemd)
         - minimal (microdnf)
         - micro (smallest UBI, does not include package manager)
-
-
-
-
+#### Rootless containers
+- containers that do not require root privileges (unprivileged containers)
+    - containerized process doesn't use the root user (id=0)
+    - root user inside the container is not the root user outside 
+    - the container runtime doesn't use the root user
+    - podman use cgroup v2 (resources limit), slirp4netns (networking), fuse-overlaysfs (Copy on Write file systems - COW)
+    - subordinate ID ranges 
+        - allowed ID Ranges configured in the host files: /etc/subuid and /etc/subgid (incluye starting id number and limit)
+        - subID ranges can be configured with the usermod command
+    - the ```podman top``` command can be used to review id mapping &rarr; ```podman top CONTAINER_NAME huser user``` (a *cat* to */proc/self/uid_map /proc/self/gid_map* can be too used)
+    - required use of privileged ports or utilities can be configured with the *sysctl* utility &rarr; ```sysctl -w "net.ipv4.ip_unprivileged_port_start=PRIVILEGED_PORT" ```
 
 ### OpenShift
 - ```ROSA``` &rarr; Red Hat OpenShift on AWS
