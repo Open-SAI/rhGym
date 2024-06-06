@@ -114,7 +114,3 @@ Podman: tool to pods, containers and images management:
 - ```ROSA``` &rarr; Red Hat OpenShift on AWS
 - ```ARO``` &rarr; Azure Red Hat OpenShift
 
-
-
-
-
