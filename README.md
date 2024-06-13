@@ -37,8 +37,7 @@ Podman: tool to pods, containers and images management:
 - ```podman image inspect registryUrl|containerNameId``` &rarr; shows information about the image
     - --format="{{.Key.Subkey}}" &rarr; show specific part of the inspect information
 - ```podman login registryUrl``` &rarr; authenticate to remote registry
-- ```podman login registryUrl``` &rarr; authenticate to remote registry
-
+- ```podman exec -it Container COMMAND``` &rarr; execute the COMMAND in the Container
 - ```podman image rm Registry/NameSpace/ImageName:TAG``` &rarr; delete local images (maybe needed to stop the containers that are running this image: ```podman stop containerName```), the -f option force the remove, ```rmi``` can be used instead ```image rm```
 - ```podman image prune``` &rarr; clean dangling images
 - ```podman image prune -a``` &rarr; clean dangling and unused images (use -f option to force and avoid interactive prompt)
@@ -98,6 +97,7 @@ Podman: tool to pods, containers and images management:
         - init (support systemd)
         - minimal (microdnf)
         - micro (smallest UBI, does not include package manager)
+    - ```podman image tree MyImage``` &rarr; list the tree of the layers in the container image
 #### Rootless containers
 - containers that do not require root privileges (unprivileged containers)
     - containerized process doesn't use the root user (id=0)
@@ -109,6 +109,39 @@ Podman: tool to pods, containers and images management:
         - subID ranges can be configured with the usermod command
     - the ```podman top``` command can be used to review id mapping &rarr; ```podman top CONTAINER_NAME huser user``` (a *cat* to */proc/self/uid_map /proc/self/gid_map* can be too used)
     - required use of privileged ports or utilities can be configured with the *sysctl* utility &rarr; ```sysctl -w "net.ipv4.ip_unprivileged_port_start=PRIVILEGED_PORT" ```
+#### Volumes
+- COW &rarr; Copy-on-write file system
+    - every instruction that modifies the container adds a data layer in read-only mode including the set of changes (`diffs`)
+    - ```podman image tree NAME-CONTAINER``` &rarr; inspect the image layers
+    - in the runtime podman create `thin` read-write additional layer on top of the previous layers
+    - when the container is deleted, podman destroy the last read-write layer &rarr; the runtime data is ephemeral!
+    - there is a performance bottleneck in write-intensive containerized processes
+- Persistent Data (Store data on Host Machine)
+    - data is persistent across container deletions.
+    - write-intensive without the limitations of the COW file systems
+    - data can be shared between multiple containers at runtime and at same time 
+    - support the NFS protocol
+    - there is volume mounts (managed by podman &rarr; production)
+        - ```podman volume create VolumeName``` &rarr; create a new volume
+        - ```podman volume inspect VolumeName``` &rarr; inspect a volume
+        - ```podman volume import VolumeName data.tar.gz``` &rarr; import data to a volume
+        - ```podman volume export VolumeName --output data.tar.gz``` &rarr; export volume data
+        - ```podman run -e MYSQL_ADMIN_PASSWORD=passwd --network my-net --mount  type=tmpfs,tmpfs-size=1024M,destination=/var/lib/data registry.url/rhel/db:latest``` &rarr; using a `tmpfs` mounting
+        - is not needed review SELinux permissions because podman manage the volumes
+    - there is data mounts (managed by the user &rarr; testing)
+    - commands:
+        - the ```--volume``` or ```-v``` option is used to both (```--volume /path/to/the/host OR VolumeName:/path/in/the/container:OPTIONS```)
+        - the ```--mount type=TYPE, source=/path/on/the/host, destination=/path/in/the/container```
+            - TYPE:
+                - bind (mounts)
+                - volume (volume mounts)
+                - tmpfs (memory ephemeral mounts)
+        - it is supported relative (volumes) and absolute paths(binds)
+    - ```podman run -p PORT_H:PORT_C --volume /path_in_host:/path_in_container:Z registry.url``` &rarr; the Z option fix possible SELinux problems
+        - ```z``` &rarr; different containers share access to a bind mount
+        - ```Z``` &rarr; exclusive access to the container
+        - ```podman unshare DIR_COMMAND(ls /p/a/t/h)``` &rarr; it is useful to troubleshooting permissions
+    
 
 ### OpenShift
 - ```ROSA``` &rarr; Red Hat OpenShift on AWS
