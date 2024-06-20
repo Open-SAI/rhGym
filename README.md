@@ -2,7 +2,11 @@
 A pragmatic space to save notes, tips, commands in a Red Hat Engineer training journey...
 
 ### Git / github 
-- Init local new repo ```$ git init```
+- ```$ git init``` &rarr; Init local new repo 
+- ```$ git checkout -b newBranchName``` &rarr; create a new branch and check it out
+- CONTRIBUTING.md file ( /.github, root, /docs) &rarr; recommended to explain the contribution policy for the project
+- There is templates to new issues (.github/ISSUE_TEMPLATE.md) and pull request (.github/PULL_REQUEST_TEMPLATE.md)
+
 
 ### Basics
 - A container is an encapsulated process with his runtime dependencies (independents libraries from the host operating system)
