@@ -6,7 +6,7 @@ A pragmatic space to save notes, tips, commands in a Red Hat Engineer training j
 - ```$ git checkout -b newBranchName``` &rarr; create a new branch and check it out
 - CONTRIBUTING.md file ( /.github, root, /docs) &rarr; recommended to explain the contribution policy for the project
 - There is templates to new issues (.github/ISSUE_TEMPLATE.md) and pull request (.github/PULL_REQUEST_TEMPLATE.md)
-
+- ```git push --set-upstream origin <BRANCH_NAME>``` &rarr; In a forked repository, in the process to make changes in a repository not owned by us, it creates a new branch on the upstream repository (remote repository linked to our local repository) on our github fork, and pushes all our commits. Before this step, can be possible to make a "Compare & pull request" in Github.
 
 ### Basics
 - A container is an encapsulated process with his runtime dependencies (independents libraries from the host operating system)
@@ -148,6 +148,29 @@ Podman: tool to pods, containers and images management:
     
 
 ### OpenShift
+- It is a *kubernetes distribution*
 - ```ROSA``` &rarr; Red Hat OpenShift on AWS
 - ```ARO``` &rarr; Azure Red Hat OpenShift
+#### Kubernetes 
+- Kubernetes is a powerful framework for creating server clusters to run containerized applications. Provides a model for defining workloads to run on a cluster.
+- OpenShift builds upon Kubernetes to provide a comprehensive and feature-rich platform for containerized applications.
+- declarative resource management
+    - controllers  &rarr; monitoring the cluster state to fullfill the declarated state of cluster
+    - namespaces &rarr; provide the capacity to control the resource access based in roles
+- pod &rarr; one or more container to run in a cluster node and support the workloads
+##### Features
+- Load balancing and Service Discovery  &rarr; it reconfigure the network/dns to performance and reliability
+- Horizontal scalling  &rarr; from a monitoring, scale the required pods/nodes to support the required load
+- Self-healing  &rarr; restart, monitor, reschedule falling applications at application level or cluster level
+- Automated rollout  &rarr; in gradual updates, it is possible make a roll back 
+- Secrets and configuration management  &rarr; configurations of secrets (usernames, passwords, etc) isolated of the containers development (does not encrypt secrets)
+- Operators support &rarr; predefined kubernetes applications to support specific workloads (by example a database deployment)
+##### Architecture
+- nodes &rarr; servers of the cluster (virtual or physical). There is two types (recommended to run in different servers, there is clusters with up to 5000 nodes):
+    - control plane nodes &rarr; the nodes to operate the cluster itself (coordination, scheduling)
+    - compute plane nodes &rarr; run the workloads
+
+
+
+
 
