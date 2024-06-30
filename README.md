@@ -149,15 +149,42 @@ Podman: tool to pods, containers and images management:
 
 ### OpenShift
 - It is a *kubernetes distribution*
-- ```ROSA``` &rarr; Red Hat OpenShift on AWS
-- ```ARO``` &rarr; Azure Red Hat OpenShift
+- Red Hat Hybrid Cloud Console &rarr; operator data uploaded to inspect cluster recommendations
+- ```oc login -u developer -p developer https://api.ocp.domain.tld:6443``` &rarr; access to the OpenShift web console
+- ```oc whoami --show-console``` &rarr; return the url web console
+- The web console
+    - it provides mainly two perspectives (Administrator: admin the cluster, Developer: to running apps)
+#### Added features over Kubernetes cluster in OpenShift
+- Workflow Integrated for developers &rarr; integrate a built-in container registry to use in CI/CD pipelines with a S2I tool to build container images
+- Observability &rarr; logging and monitoring services for the applications and the cluster
+- Management of Server &rarr; hosts in a cluster use RHEL CoreOS (inmutable operating system to optimized to run containerized applications) managed from OpenShift unified tools (graphical web console)
+- Product Versions
+    - OpenShift Platform Plus
+        - Advanced Cluster Management
+        - Advanced Cluster Security
+        - Quay private registry platform
+    - OpenShift Container Platform
+        - Serveless (Knative)
+        - Service Mesh (Istio)
+        - Pipelines (Tekton)
+        - GitOps (Argo CD)
+    - Kubernetes Engine
+        - latest Kubernetes version
+        - enterprise stability and security hardening
+        - Linux Core OS container OS deployments
+- Managed OpenShift Services
+    - AWS &rarr; ```ROSA``` &rarr; Red Hat OpenShift on AWS
+    - Azure &rarr; ```ARO``` &rarr; Azure Red Hat OpenShift
+    - IBM Cloud  
+    - Google Cloud &rarr; Red Hat OpenShift Dedicated 
 #### Kubernetes 
 - Kubernetes is a powerful framework for creating server clusters to run containerized applications. Provides a model for defining workloads to run on a cluster.
 - OpenShift builds upon Kubernetes to provide a comprehensive and feature-rich platform for containerized applications.
 - declarative resource management
     - controllers  &rarr; monitoring the cluster state to fullfill the declarated state of cluster
     - namespaces &rarr; provide the capacity to control the resource access based in roles
-- pod &rarr; one or more container to run in a cluster node and support the workloads
+- pod &rarr; is the most small unit of a kubenetes containerized app, include one or more container to run in a cluster node and support the workloads
+- provides a web console that is not installed by default, only supports token based authentication, it works through a proxy (the only point of access)
 ##### Features
 - Load balancing and Service Discovery  &rarr; it reconfigure the network/dns to performance and reliability
 - Horizontal scalling  &rarr; from a monitoring, scale the required pods/nodes to support the required load
@@ -169,6 +196,12 @@ Podman: tool to pods, containers and images management:
 - nodes &rarr; servers of the cluster (virtual or physical). There is two types (recommended to run in different servers, there is clusters with up to 5000 nodes):
     - control plane nodes &rarr; the nodes to operate the cluster itself (coordination, scheduling)
     - compute plane nodes &rarr; run the workloads
+#### OpenShift terminology
+- Pods &rarr; the same concept from Kubernetes
+- Deployments &rarr; the process that support a running application
+- Projects &rarr; a namespace (same to Kubernetes) to offer multitenancy for apps
+- Routes &rarr; used to expose apps and services outside of the cluster
+- Operators &rarr; packaged kubernetes apps to extend cluster functionalities
 
 
 
