@@ -154,6 +154,14 @@ Podman: tool to pods, containers and images management:
 - ```oc whoami --show-console``` &rarr; return the url web console
 - The web console
     - it provides mainly two perspectives (Administrator: admin the cluster, Developer: to running apps)
+- ```oc get nodes``` &rarr; view the cluster nodes
+- ```oc debug node/name``` &rarr; it opens the console of the debug pod
+- ```chroot /host``` &rarr; ...to use the host root systems (binaries)
+    - ```crictl ps``` &rarr; display the containers that are running in this system (node machine)
+    - ```systemctl status kubelet``` &rarr; status of the kubelet service in the node
+    - ```systemctl status crio``` &rarr; status of the CRIO-O service in the node
+    - the node run a Red Hat Enterprise Linux CoreOS release
+    - the container of the debug pod run a standard RHEL
 #### Added features over Kubernetes cluster in OpenShift
 - Workflow Integrated for developers &rarr; integrate a built-in container registry to use in CI/CD pipelines with a S2I tool to build container images
 - Observability &rarr; logging and monitoring services for the applications and the cluster
@@ -202,6 +210,12 @@ Podman: tool to pods, containers and images management:
 - Projects &rarr; a namespace (same to Kubernetes) to offer multitenancy for apps
 - Routes &rarr; used to expose apps and services outside of the cluster
 - Operators &rarr; packaged kubernetes apps to extend cluster functionalities
+- CRI-O &rarr; Container Runtime Interface service for OCI
+- kubelet &rarr; service running in the nodes managing the container lifecycles and reports to the control plane
+- node &rarr; bare metal, virtual, cloud machines that runs the pods
+- MachineConfig &rarr; definition of the state, changes, files, services, s.o. updates for the CRI-O and kubelet services (resource). If the MachineConfig changes, MCO execute all the needed changes to get the required state
+- MCO &rarr; Machine Config Operator, it maintains the configuration and operating systems of the cluster machines (at cluster-level)
+#### OpenShift monitoring
 
 
 
