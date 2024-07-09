@@ -154,6 +154,8 @@ Podman: tool to pods, containers and images management:
 - ```oc whoami --show-console``` &rarr; return the url web console
 - The web console
     - it provides mainly two perspectives (Administrator: admin the cluster, Developer: to running apps)
+- The ```oc``` command maybe equivalent to ```kubectl``` command, but it has expanded utilities to the specific operation of RHOCP
+- The TAB completion is very useful in the ```oc``` operation, and it works at almost all the parameters and options levels
 - ```oc get nodes``` &rarr; view the cluster nodes
 - ```oc debug node/name``` &rarr; it opens the console of the debug pod
 - ```chroot /host``` &rarr; ...to use the host root systems (binaries)
@@ -162,6 +164,19 @@ Podman: tool to pods, containers and images management:
     - ```systemctl status crio``` &rarr; status of the CRIO-O service in the node
     - the node run a Red Hat Enterprise Linux CoreOS release
     - the container of the debug pod run a standard RHEL
+- ```oc login urlCluster``` &rarr; log to the RHOCP cluster
+- ```oc cluster-info``` &rarr; details about the actual cluster
+- ```oc api-versions``` &rarr; show the supported API versions of the cluster
+- ```oc get clusteroperator``` &rarr; list the installed operators of the cluster
+- ```oc get pod``` &rarr; list the pods of in the current cluster project (```pod``` can be replaced with other type of resource), it supports ```-o json``` and ```-o yaml``` format output option
+- ```oc get all``` &rarr; show the most important facts about the cluster for the current project
+- ```oc describe RESOURCE``` &rarr; show expanded information about RESOURCE
+- ```oc explain any.api.object.resource``` &rarr; useful to learn about the fields of an API object 
+- ```oc create -f fileDescriptor.yml``` &rarr; create a RHOCP resource
+- ```oc status``` &rarr; summarize the information about the current project (if ```--suggest``` option is used it shows some identified issues)
+- ```oc delete RESOURCE RESOURCE-NAME``` &rarr; it delete a specific non-managed resource (if its managed the cluster will recreate it), in a project deletion, all within resources associated will be deleted
+- to execute commands in a another current project, that project name can be specified with the option  ```--namespace``` or ```-n```
+- in the *Help &rarr; Command line tools of the web console*, with the *Copy login Command* its copied the login command and token to authenticate from the CLI
 #### Added features over Kubernetes cluster in OpenShift
 - Workflow Integrated for developers &rarr; integrate a built-in container registry to use in CI/CD pipelines with a S2I tool to build container images
 - Observability &rarr; logging and monitoring services for the applications and the cluster
@@ -193,6 +208,10 @@ Podman: tool to pods, containers and images management:
     - namespaces &rarr; provide the capacity to control the resource access based in roles
 - pod &rarr; is the most small unit of a kubenetes containerized app, include one or more container to run in a cluster node and support the workloads
 - provides a web console that is not installed by default, only supports token based authentication, it works through a proxy (the only point of access)
+- ```kubectl version --client``` &rarr; version of installed kubectl
+- ```kubectl --help``` &rarr; show basic
+- ```kubectl OPTION --help``` &rarr; show basic info about specific OPTION
+- ```kubectl explain OPTION``` &rarr; show detailed information about OPTION
 ##### Features
 - Load balancing and Service Discovery  &rarr; it reconfigure the network/dns to performance and reliability
 - Horizontal scalling  &rarr; from a monitoring, scale the required pods/nodes to support the required load
