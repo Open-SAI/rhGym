@@ -176,7 +176,9 @@ Podman: tool to pods, containers and images management:
 - ```oc status``` &rarr; summarize the information about the current project (if ```--suggest``` option is used it shows some identified issues)
 - ```oc delete RESOURCE RESOURCE-NAME``` &rarr; it delete a specific non-managed resource (if its managed the cluster will recreate it), in a project deletion, all within resources associated will be deleted
 - to execute commands in a another current project, that project name can be specified with the option  ```--namespace``` or ```-n```
-- in the *Help &rarr; Command line tools of the web console*, with the *Copy login Command* its copied the login command and token to authenticate from the CLI
+- in the *Help &rarr; Command line tools* of the web console, with the *Copy login Command* its copied the login command and token to authenticate from the CLI
+    - ```oc login --token=sha256-Xxys... ...A5e7 --server=https://api.ocp.openshifturl.com:6443``` &rarr; CLI login using a token
+    - ```curl -H "Authorization: Bearer sha256-Xxys... ...A5e7" "https://api.ocp.openshifturl.com:6443/apis/user.openshift.io/v1/users/~``` &rarr; API login using a token
 #### Added features over Kubernetes cluster in OpenShift
 - Workflow Integrated for developers &rarr; integrate a built-in container registry to use in CI/CD pipelines with a S2I tool to build container images
 - Observability &rarr; logging and monitoring services for the applications and the cluster
