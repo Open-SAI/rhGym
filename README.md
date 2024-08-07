@@ -150,8 +150,11 @@ Podman: tool to pods, containers and images management:
 ### OpenShift
 - It is a *kubernetes distribution*
 - Red Hat Hybrid Cloud Console &rarr; operator data uploaded to inspect cluster recommendations
+- ```oc help``` &rarr; show basic information about cluster CLI operation
+- ```oc PARAMETER --help``` &rarr; show detailed info about the using of PARAMETER in the oc command
 - ```oc login -u developer -p developer https://api.ocp.domain.tld:6443``` &rarr; access to the OpenShift web console
 - ```oc whoami --show-console``` &rarr; return the url web console
+- ```oc version``` &rarr; main version items of OpenShift cluster
 - The web console
     - it provides mainly two perspectives (Administrator: admin the cluster, Developer: to running apps)
 - The ```oc``` command maybe equivalent to ```kubectl``` command, but it has expanded utilities to the specific operation of RHOCP
@@ -168,8 +171,10 @@ Podman: tool to pods, containers and images management:
 - ```oc cluster-info``` &rarr; details about the actual cluster
 - ```oc api-versions``` &rarr; show the supported API versions of the cluster
 - ```oc get clusteroperator``` &rarr; list the installed operators of the cluster
-- ```oc get pod``` &rarr; list the pods of in the current cluster project (```pod``` can be replaced with other type of resource), it supports ```-o json``` and ```-o yaml``` format output option
+- ```oc get pod``` &rarr; list the pods of in the current cluster project (```pod``` can be replaced with other type of resource), it supports ```-o json``` and ```-o yaml``` format output option, there is a *yq* or *jq* command to pipeline and parse the output (maybe inconsistences by *yq* versions). It also exists a *custom output* with the ```-o COLUMN_NAME0:"json query string0, "COLUMN_NAME1:"json query string1, ..."```
+- The JSONPath expressions is supported too &rarr; ```-o jsonpath='{"Object 0: "}{.json.query0} {"Object 1: "}{.json.query1} ...'```
 - ```oc get all``` &rarr; show the most important facts about the cluster for the current project
+- ```-o go-template=...go template expression"``` &rarr; output to a go template
 - ```oc describe RESOURCE``` &rarr; show expanded information about RESOURCE
 - ```oc explain any.api.object.resource``` &rarr; useful to learn about the fields of an API object 
 - ```oc create -f fileDescriptor.yml``` &rarr; create a RHOCP resource
@@ -179,6 +184,7 @@ Podman: tool to pods, containers and images management:
 - in the *Help &rarr; Command line tools* of the web console, with the *Copy login Command* its copied the login command and token to authenticate from the CLI
     - ```oc login --token=sha256-Xxys... ...A5e7 --server=https://api.ocp.openshifturl.com:6443``` &rarr; CLI login using a token
     - ```curl -H "Authorization: Bearer sha256-Xxys... ...A5e7" "https://api.ocp.openshifturl.com:6443/apis/user.openshift.io/v1/users/~``` &rarr; API login using a token
+- ```oc get pods -o wide``` &rarr; the option *-o wide* show additional fields in the output
 #### Added features over Kubernetes cluster in OpenShift
 - Workflow Integrated for developers &rarr; integrate a built-in container registry to use in CI/CD pipelines with a S2I tool to build container images
 - Observability &rarr; logging and monitoring services for the applications and the cluster
@@ -202,6 +208,12 @@ Podman: tool to pods, containers and images management:
     - Azure &rarr; ```ARO``` &rarr; Azure Red Hat OpenShift
     - IBM Cloud  
     - Google Cloud &rarr; Red Hat OpenShift Dedicated 
+- Specific OpenShift resources that can be created with a YAML or JSON manifest file (not included in kubernetes):
+    - BuildConfig (used by the S2I OpenShift feature to build a container image from a git repository, useful with a DeploymentConfig in a CI/CD workflow)
+    - DeploymentConfig (improved version of a DeploymentConfig object)
+    - Routes (ingress point of a microservice/application)
+
+
 #### Kubernetes 
 - Kubernetes is a powerful framework for creating server clusters to run containerized applications. Provides a model for defining workloads to run on a cluster.
 - OpenShift builds upon Kubernetes to provide a comprehensive and feature-rich platform for containerized applications.
@@ -211,9 +223,25 @@ Podman: tool to pods, containers and images management:
 - pod &rarr; is the most small unit of a kubenetes containerized app, include one or more container to run in a cluster node and support the workloads
 - provides a web console that is not installed by default, only supports token based authentication, it works through a proxy (the only point of access)
 - ```kubectl version --client``` &rarr; version of installed kubectl
-- ```kubectl --help``` &rarr; show basic
+- ```kubectl api-resources``` &rarr; show kubernetes resources (supprts --namespaced, --api-group APS, --sort-by NAME options)
+- ```kubectl explain pod``` &rarr; show information about the resource pod
+- ```kubectl help``` &rarr; show basic kubernetes operation
 - ```kubectl OPTION --help``` &rarr; show basic info about specific OPTION
 - ```kubectl explain OPTION``` &rarr; show detailed information about OPTION
+- ```kubectl create``` &rarr; to create a resource from stdin or file
+- Kubernetes namespaces are similar to OpenShift projects, there is a one to one relation between a namespace and an OpenShift project
+- Kubernetes resources that can be created with a YAML or JSON manifest file (included in RHOCP too):
+    - Pods
+    - Services
+    - ReplicaSets (pods replicas)
+    - Persistent Volumes (storage areas)
+    - Persistent Volumes Claims (storage areas claims)
+    - ConfigMaps (config values), Secrets 
+    - Deployment (set of containers from a pod with his use strategies)
+- Almost every object include an *status* and *spec* object inside
+    - *spec* &rarr; intented state of the resource, specified in the creation of the object (by example the required replicas)
+    - *status* &rarr; current status (updated by the kubernetes controllers, the *control plane* actively manages every state to get the desired state supplied)
+
 ##### Features
 - Load balancing and Service Discovery  &rarr; it reconfigure the network/dns to performance and reliability
 - Horizontal scalling  &rarr; from a monitoring, scale the required pods/nodes to support the required load
