@@ -185,6 +185,7 @@ Podman: tool to pods, containers and images management:
     - ```oc login --token=sha256-Xxys... ...A5e7 --server=https://api.ocp.openshifturl.com:6443``` &rarr; CLI login using a token
     - ```curl -H "Authorization: Bearer sha256-Xxys... ...A5e7" "https://api.ocp.openshifturl.com:6443/apis/user.openshift.io/v1/users/~``` &rarr; API login using a token
 - ```oc get pods -o wide``` &rarr; the option *-o wide* show additional fields in the output
+- ```oc get all -n NAMESPACE --show-kind``` &rarr; show all the resources, status, types in the *NAMESPACE*
 #### Added features over Kubernetes cluster in OpenShift
 - Workflow Integrated for developers &rarr; integrate a built-in container registry to use in CI/CD pipelines with a S2I tool to build container images
 - Observability &rarr; logging and monitoring services for the applications and the cluster
@@ -265,8 +266,30 @@ Podman: tool to pods, containers and images management:
 - MachineConfig &rarr; definition of the state, changes, files, services, s.o. updates for the CRI-O and kubelet services (resource). If the MachineConfig changes, MCO execute all the needed changes to get the required state
 - MCO &rarr; Machine Config Operator, it maintains the configuration and operating systems of the cluster machines (at cluster-level)
 #### OpenShift monitoring
-
-
-
+- ```oc get operators``` &rarr; list the *add-on* operators
+- ```oc adm top pods -A``` &rarr; list the memory and cpu usage of all pods in the cluster, it can be added the ```--sum``` option to print at the end, the sum of all the values, the ```-A``` parameter can be replaced with the pod name and adding the ```--containers``` option, it prints the resource usage of all the containers in that pod
+- To review the cluster metrics, the effective way is to use the Web Console: *Web &rarr; Overview* route (cluster and project view)
+- In the *Workloads* section can be viewed the resource usage details for pods
+- It is possible too in the *Observe &rarr; Metrics* section of the Web Console, perform Prometheus queries to review detailed metrics
+- ```oc get events -n NAMESPACE``` &rarr; it prints the events in the *NAMESPACE*, adding ```--sort-by .metadata.creationTimestamp``` it is possible to sort by time the events
+- ```oc describe pod PODNAME``` &rarr; return the events related to a single pod named *PODNAME* 
+- The monitoring stack of RHCOP is supported on the Prometheus project (open source tool), search in the resources *alertmanager-...* named pods
+- ```oc log PODNAME -n NAMESPACE``` &rarr; logs of the *PODNAME*
+- the json,yaml output of the ```oc get node NODENAME``` (piped to ```jq```, ```yq``` or ```-o jsonpath=...```) can be used to get the conditions of the node:
+    - *MemoryPresure* it should not be true
+    - *DiskPressure* it should not be true
+    - *PIDPressure* it should not be true
+    - *Ready* it should not be false
+    - Other conditions: *OutOfDisk*,*NetworkUnavailable*,*NotReady*,*SchedulingDisabled*
+- ```oc adm node-logs NODENAME -u SpecificUnit``` &rarr; logs of processes that are running in a specific node
+- Each node must be have a crio service (container engine) an kubelet service (manage the pods lifecycle)
+- ```oc debug NODE/NODENAME``` &rarr; start a debug session on that node
+    - ```chroot /host``` &rarr; can be used to run commands in the host (```systemctl status SERVICE``` and soo on...)
+- ```oc logs PODNAME -c CONTAINERNAME``` &rarr; log output of the container *CONTAINERNAME*
+- ```oc debug``` &rarr; start a session in a pod
+- ```oc debug PODNAME/TESTJOB --as-user=10000000``` &rarr; run a the *TESTJOB* as an non root user
+- ```oc debug NODE/NODENAME``` &rarr; debug session for *NODENAME*
+- ```oc adm must-gather --dest-dir /path/to/folder``` &rarr; it helps to create a debug profile to get RH support, this folder can be compressed: ```tar cvfa must-gather.tar /path/to/must-gather/folder/```
+- ```oc adm inspect CLUSTEROPERATOR/OPERATORNAME OTHER/OPERATOR/NAME ...```  &rarr; using *inspect* option to gathers information about a specific resource, can be used the ```--dest-dir``` option too, and the ```--since NUMBERtimeUnit``` to filter the results in a time duration range
 
 
