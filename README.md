@@ -170,7 +170,7 @@ Podman: tool to pods, containers and images management:
 - ```oc login urlCluster``` &rarr; log to the RHOCP cluster
 - ```oc cluster-info``` &rarr; details about the actual cluster
 - ```oc api-versions``` &rarr; show the supported API versions of the cluster
-- ```oc get clusteroperator``` &rarr; list the installed operators of the cluster
+- ```oc get clusteroperator``` &rarr; list the installed operators by default in the cluster (works too with the plural *operatorS*)
 - ```oc get pod``` &rarr; list the pods of in the current cluster project (```pod``` can be replaced with other type of resource), it supports ```-o json``` and ```-o yaml``` format output option, there is a *yq* or *jq* command to pipeline and parse the output (maybe inconsistences by *yq* versions). It also exists a *custom output* with the ```-o COLUMN_NAME0:"json query string0, "COLUMN_NAME1:"json query string1, ..."```
 - The JSONPath expressions is supported too &rarr; ```-o jsonpath='{"Object 0: "}{.json.query0} {"Object 1: "}{.json.query1} ...'```
 - ```oc get all``` &rarr; show the most important facts about the cluster for the current project
@@ -266,7 +266,7 @@ Podman: tool to pods, containers and images management:
 - MachineConfig &rarr; definition of the state, changes, files, services, s.o. updates for the CRI-O and kubelet services (resource). If the MachineConfig changes, MCO execute all the needed changes to get the required state
 - MCO &rarr; Machine Config Operator, it maintains the configuration and operating systems of the cluster machines (at cluster-level)
 #### OpenShift monitoring
-- ```oc get operators``` &rarr; list the *add-on* operators
+- ```oc get operator``` &rarr; list the *add-on* operators installed by the users (it works too with the plural *operatorS*)
 - ```oc adm top pods -A``` &rarr; list the memory and cpu usage of all pods in the cluster, it can be added the ```--sum``` option to print at the end, the sum of all the values, the ```-A``` parameter can be replaced with the pod name and adding the ```--containers``` option, it prints the resource usage of all the containers in that pod
 - To review the cluster metrics, the effective way is to use the Web Console: *Web &rarr; Overview* route (cluster and project view)
 - In the *Workloads* section can be viewed the resource usage details for pods
