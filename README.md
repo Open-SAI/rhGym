@@ -1,6 +1,9 @@
 # Red Hat Gym 
 A pragmatic space to save notes, tips, commands in a Red Hat Engineer training journey...
 
+### S.O.
+  - ```$ dnf repoquery --whatsupplements langpacks-es``` &rarr; review what packages must be installed by a langpack (example)
+
 ### Git / github 
 - ```$ git init``` &rarr; Init local new repo 
 - ```$ git checkout -b newBranchName``` &rarr; create a new branch and check it out
