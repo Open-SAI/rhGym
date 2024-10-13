@@ -2,7 +2,8 @@
 A pragmatic space to save notes, tips, commands in a Red Hat Engineer training journey...
 
 ### S.O.
-  - ```$ dnf repoquery --whatsupplements langpacks-es``` &rarr; review what packages must be installed by a langpack (example)
+- ```$ dnf repoquery --whatsupplements langpacks-es``` &rarr; review what packages must be installed by a langpack (example)
+- ```$ systemctl list-units`` &rarr; review all the units loaded in systemd
 
 ### Git / github 
 - ```$ git init``` &rarr; Init local new repo 
