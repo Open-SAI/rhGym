@@ -58,6 +58,7 @@ Podman: tool to pods, containers and images management:
 - ```podman image rm ContainerImage``` &rarr; remove the ContainerImage, to delete an image it is necesary stop and delete all the containers that use the image (-f option to force)
 - ```podman push Registry/Url/user/ContainerImage:tag``` &rarr; push the ContainerImage to the Registry
 - ```podman image tree ContainerImage:tag``` &rarr; inspect the image layers in the ContainerImage:tag
+- Compatible with kubernetes (can use Podman to manage containers)
 
 #### Images
 - Containerfile &rarr; set of instructions to build a container image
