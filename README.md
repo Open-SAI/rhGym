@@ -3,27 +3,27 @@ A pragmatic space to save notes, tips, commands in a Red Hat Engineer training j
 
 ### S.O.
 - ```$ dnf repoquery --whatsupplements langpacks-es``` &rarr; review what packages must be installed by a langpack (example)
-- ```$ systemctl list-units`` &rarr; review all the units loaded in systemd
-- ```echo $?`` &rarr; print the returns value of the last command (*exit=0...*)
+- ```$ systemctl list-units``` &rarr; review all the units loaded in systemd
+- ```echo $?``` &rarr; print the returns value of the last command (*exit=0...*)
 #### Networking
-- ```$ nmtui`` &rarr; text user interface application to managing NetworkManager (available in NetworkManager-tui package)
-- ```$ nmcli connection show`` &rarr; display all available connection profiles
-- ```$ nmcli connection show "lo"`` &rarr; show the information about a specific connection profile
-- ```$ nmcli device`` &rarr; show the networks devices of the system
+- ```$ nmtui``` &rarr; text user interface application to managing NetworkManager (available in NetworkManager-tui package)
+- ```$ nmcli connection show``` &rarr; display all available connection profiles
+- ```$ nmcli connection show "lo"``` &rarr; show the information about a specific connection profile
+- ```$ nmcli device``` &rarr; show the networks devices of the system
 - *ICMP* &rarr; Internet Control Message Protocol (the *ping* command implements it to test the host connectivity)
-- ```$ ping host.name`` &rarr; *-b*: broadcast example test with ping, *-i*: interval in seconds, *-c*: count number of requests, *-W*: timeout, *-I*: the interface to send the requests
-- ```$ firewall-cmd --get-icmptypes`` &rarr; list all the icmp types
-- ```$ firewall-cmd --info-icmptype=echo-reply`` &rarr; icmp works on ipv4/ipv6?
-- ```$ firewall-cmd --query-icmp-block=echo-reply`` &rarr; icmp is blocked?
-- ```$ firewall-cmd --add-icmp-block=echo-reply`` &rarr; block icmp request!
-- ```$ firewall-cmd --remove-icmp-block=echo-reply`` &rarr; unblock icmp requests
-- ```$ firewall-cmd --permanent --set-target=DROP`` &rarr; block and drop icmp requests
-- ```$ firewall-cmd --permanent --set-target=default`` &rarr; unblock icmp requests
+- ```$ ping host.name``` &rarr; *-b*: broadcast example test with ping, *-i*: interval in seconds, *-c*: count number of requests, *-W*: timeout, *-I*: the interface to send the requests
+- ```$ firewall-cmd --get-icmptypes``` &rarr; list all the icmp types
+- ```$ firewall-cmd --info-icmptype=echo-reply``` &rarr; icmp works on ipv4/ipv6?
+- ```$ firewall-cmd --query-icmp-block=echo-reply``` &rarr; icmp is blocked?
+- ```$ firewall-cmd --add-icmp-block=echo-reply``` &rarr; block icmp request!
+- ```$ firewall-cmd --remove-icmp-block=echo-reply``` &rarr; unblock icmp requests
+- ```$ firewall-cmd --permanent --set-target=DROP``` &rarr; block and drop icmp requests
+- ```$ firewall-cmd --permanent --set-target=default``` &rarr; unblock icmp requests
 - */etc/resolv.conf* &rarr; system DNS servers list (managed by NetworkManager service)
 - */etc/NetworkManager/NetworkManager.conf* &rarr; NetworkManager parameters
 - *nmap* &rarr; ...use with authorization, maybe illegal. Show hosts in the network, services/versions in network hosts, O.S., firewalls, filters. *-n*:display host information without name resolution, *-sn*: disable port scans, *-sU*: UDP scans, support the scan of network address 
-- ```$ ncat host port`` &rarr; client connection to *host:port*, acts as a server with the *-l* option, *-e COMMAND*: send send incoming traffic to *COMMAND*
-- ```$ iptraf-ng`` &rarr; network monitor software (*tui* interface)
+- ```$ ncat host port``` &rarr; client connection to *host:port*, acts as a server with the *-l* option, *-e COMMAND*: send send incoming traffic to *COMMAND*
+- ```$ iptraf-ng``` &rarr; network monitor software (*tui* interface)
 
 
 ### Git / github 
