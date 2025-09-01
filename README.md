@@ -33,7 +33,7 @@ A pragmatic space to save notes, tips, commands in a Red Hat Engineer training j
 - There is templates to new issues (.github/ISSUE_TEMPLATE.md) and pull request (.github/PULL_REQUEST_TEMPLATE.md)
 - ```git push --set-upstream origin <BRANCH_NAME>``` &rarr; In a forked repository, in the process to make changes in a repository not owned by us, it creates a new branch on the upstream repository (remote repository linked to our local repository) on our github fork, and pushes all our commits. Before this step, can be possible to make a "Compare & pull request" in Github.
 
-### Basics
+### Container Basics
 - A container is an encapsulated process with his runtime dependencies (independents libraries from the host operating system)
 - Container image layers are immutable
 - The container engine add a writable layer for runtime file modifications
@@ -59,7 +59,7 @@ Podman: tool to pods, containers and images management:
 - ```podman login registryUrl``` &rarr; authenticate to remote registry
 - ```podman search imageName``` &rarr; search image in enabled registries
 - ```podman image ls / podman images``` &rarr; list the images available locally 
-- ```podman build --file ContainerFILE --tag registrie/user/imageName/TAG``` &rarr; build an image, can be later pushed to registry
+- ```podman build --file ContainerFILE --tag registry/user/imageName/TAG``` &rarr; build an image, can be later pushed to registry
 - ```podman build -f ContainerFILE -t ContainerImage:TAG``` &rarr; create an image named ContainerImage:TAG (-t option), from the ContainerFILE descriptor
 - ```podman build ContainerImage:TAG .``` &rarr; create an image named ContainerImage:TAG using the local Containerfile in "." (note the default name "Containerfile")
 - ```podman push registry/user/imageName/TAG``` &rarr; push an image to registry
